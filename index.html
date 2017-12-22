@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Reactor Idle Savegame Editor</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap css-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--LZString library-->
+    <script src="LZString.js"></script>
+  </head>
+<body>
+
+  <form>
+    <div class="form-group">
+      <label for="email">Paste a savegame here:</label>
+      <input class="form-control" id="inputString" type="text">
+    </div>
+    <button type="button" class="btn btn-default" onclick="decodeSaveGame()">Decode</button>
+    <div class="form-group">
+      <label for="pwd">Savegame JSON text:</label>
+      <textarea class="form-control" rows="15" id="jsonText"></textarea>
+    </div>
+    <button type="button" class="btn btn-default" onclick="encodeSaveGame()">Encode</button>
+    <div class="form-group">
+      <label for="pwd">Savegame string:</label>
+      <input class="form-control" id="outputSting" type="text">
+    </div>
+ </form>
+
+ <script>
+   function decodeSaveGame() {
+       var saveGameInputString = document.getElementById("inputString").value;
+       document.getElementById("jsonText").value = LZString.decompressFromBase64(saveGameInputString);;
+   }
+   function encodeSaveGame() {
+       var saveGameJSONString = document.getElementById("jsonText").value;
+       document.getElementById("outputSting").value = LZString.compressToBase64(saveGameJSONString);
+   }
+ </script>
+
+</body>
+</html>
